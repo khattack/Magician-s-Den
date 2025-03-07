@@ -38,10 +38,11 @@ def get_timeframe_start(timeframe):
     """
     now = datetime.now()
     if timeframe == "monthly":
-        return now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        # Monthly candles start at 05:00 PKT on the 1st of the month
+        return now.replace(day=1, hour=5, minute=0, second=0, microsecond=0)
     elif timeframe == "weekly":
-        # TradingView weekly candles start on Monday at 00:00 PKT
-        return (now - timedelta(days=now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+        # Weekly candles start on Monday at 05:00 PKT
+        return (now - timedelta(days=now.weekday())).replace(hour=5, minute=0, second=0, microsecond=0)
     elif timeframe == "daily":
         # Daily candles start at 05:00 PKT
         return now.replace(hour=5, minute=0, second=0, microsecond=0)
