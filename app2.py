@@ -47,7 +47,7 @@ def get_timeframe_start(timeframe):
         return now.replace(hour=5, minute=0, second=0, microsecond=0)
     elif timeframe == "4hourly":
         # 4-hourly candles start at 01:00, 05:00, 09:00, etc. PKT
-        start_hour = ((now.hour - 1) % 24 // 4) * 4 + 1  # Adjusted for 01:00 start
+        start_hour = (now.hour // 4) * 4 + 1  # Adjusted for 01:00 start
         return now.replace(hour=start_hour, minute=0, second=0, microsecond=0)
     elif timeframe == "1hourly":
         # 1-hourly candles start at the top of the hour
