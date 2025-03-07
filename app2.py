@@ -31,7 +31,7 @@ def auto_fit_to_screen_calculation(start_price, end_price, start_time, end_time,
     
     return predicted_price
 
-# Function to get the start of a specific timeframe (aligned with PKT)
+# Function to get the start of a specific timeframe (corrected)
 def get_timeframe_start(timeframe):
     """
     Calculate the start of the specified timeframe, aligned with Pakistan Time (PKT).
@@ -47,7 +47,7 @@ def get_timeframe_start(timeframe):
         return now.replace(hour=5, minute=0, second=0, microsecond=0)
     elif timeframe == "4hourly":
         # 4-hourly candles start at 01:00, 05:00, 09:00, etc. PKT
-        start_hour = ((now.hour - 1) // 4) * 4 + 1  # Adjust for 01:00 start
+        start_hour = ((now.hour - 1) % 24 // 4) * 4 + 1  # Adjusted for 01:00 start
         return now.replace(hour=start_hour, minute=0, second=0, microsecond=0)
     elif timeframe == "1hourly":
         # 1-hourly candles start at the top of the hour
